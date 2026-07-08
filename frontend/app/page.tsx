@@ -1,29 +1,37 @@
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white flex items-center justify-center p-6">
-      <div className="max-w-3xl w-full text-center">
-        <h1 className="text-5xl font-bold mb-6">
+    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-red-950 text-white flex items-center justify-center px-6">
+      <div className="max-w-4xl w-full text-center">
+
+        <h1 className="text-6xl font-extrabold mb-6">
           🩸 Blood Report Analyzer
         </h1>
 
-        <p className="text-gray-300 text-lg mb-10">
-          Upload your blood report and receive AI-powered explanations in
-          simple, easy-to-understand language.
+        <p className="text-xl text-gray-300 mb-12">
+          Upload your blood report and receive AI-powered explanations,
+          abnormal value detection, and personalized health insights.
         </p>
 
-        <div className="border-2 border-dashed border-gray-600 rounded-2xl p-12 mb-8">
-          <p className="text-xl font-semibold">
-            📄 Drag & Drop your Blood Report
+        <div className="border-2 border-dashed border-red-500 rounded-3xl p-16 bg-white/5 backdrop-blur-sm">
+
+          <div className="text-6xl mb-5">
+              📄
+          </div>
+
+          <h2 className="text-2xl font-bold">
+            Drag & Drop your Blood Report
+          </h2>
+
+          <p className="text-gray-400 mt-3">
+            PDF • JPG • PNG
           </p>
 
-          <p className="text-gray-400 mt-2">
-            Supports PDF, JPG and PNG files
-          </p>
+          <button className="mt-10 bg-red-600 hover:bg-red-700 transition px-8 py-4 rounded-xl text-lg font-semibold">
+            Upload Report
+          </button>
+
         </div>
 
-        <button className="bg-red-600 hover:bg-red-700 transition px-8 py-3 rounded-xl text-lg font-semibold">
-          Analyze Report
-        </button>
       </div>
     </main>
   );
