@@ -1,38 +1,30 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export default function Home() {
+  const [message, setMessage] = useState("Loading backend...");
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message))
+      .catch(() => setMessage("Backend not connected"));
+  }, []);
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-red-950 text-white flex items-center justify-center px-6">
-      <div className="max-w-4xl w-full text-center">
+    <main className="min-h-screen flex flex-col items-center justify-center bg-slate-950 text-white">
+      <h1 className="text-5xl font-bold mb-6">
+        🩸 Blood Report Analyzer
+      </h1>
 
-        <h1 className="text-6xl font-extrabold mb-6">
-          🩸 Blood Report Analyzer
-        </h1>
+      <p className="text-xl mb-8">
+        {message}
+      </p>
 
-        <p className="text-xl text-gray-300 mb-12">
-          Upload your blood report and receive AI-powered explanations,
-          abnormal value detection, and personalized health insights.
-        </p>
-
-        <div className="border-2 border-dashed border-red-500 rounded-3xl p-16 bg-white/5 backdrop-blur-sm">
-
-          <div className="text-6xl mb-5">
-              📄
-          </div>
-
-          <h2 className="text-2xl font-bold">
-            Drag & Drop your Blood Report
-          </h2>
-
-          <p className="text-gray-400 mt-3">
-            PDF • JPG • PNG
-          </p>
-
-          <button className="mt-10 bg-red-600 hover:bg-red-700 transition px-8 py-4 rounded-xl text-lg font-semibold">
-            Upload Report
-          </button>
-
-        </div>
-
-      </div>
+      <button className="bg-red-600 px-6 py-3 rounded-xl hover:bg-red-700">
+        Upload Blood Report
+      </button>
     </main>
   );
 }
