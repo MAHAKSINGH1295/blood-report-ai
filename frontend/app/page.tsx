@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [message, setMessage] = useState("Loading backend...");
+  const [message, setMessage] = useState("Connecting to backend...");
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/")
-      .then((res) => res.json())
+      .then((response) => response.json())
       .then((data) => setMessage(data.message))
       .catch(() => setMessage("Backend not connected"));
   }, []);
@@ -18,11 +18,11 @@ export default function Home() {
         🩸 Blood Report Analyzer
       </h1>
 
-      <p className="text-xl mb-8">
+      <p className="text-xl text-green-400 mb-8">
         {message}
       </p>
 
-      <button className="bg-red-600 px-6 py-3 rounded-xl hover:bg-red-700">
+      <button className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg">
         Upload Blood Report
       </button>
     </main>
