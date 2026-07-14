@@ -9,37 +9,47 @@ Usage:
 import sys
 from pathlib import Path
 
-# Make sure "app" is importable when running this script directly
-# from the backend/ folder.
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from app.services.ocr_service import extract_text_from_pdf, extract_text_from_image
+from app.services.ocr_service import (
+    extract_text_from_pdf,
+    extract_text_from_image,
+    extract_text_from_scanned_pdf,
+)
 
 SAMPLES_DIR = Path(__file__).resolve().parent.parent / "storage" / "samples"
 
 
 def main():
-    pdf_path = SAMPLES_DIR / "digital_sample.pdf"
-    image_path = SAMPLES_DIR / "scanned_sample.jpg"
+    digital_pdf = SAMPLES_DIR / "digital_sample.pdf"
+    loose_image = SAMPLES_DIR / "scanned_sample.jpg"
+    scanned_pdf = SAMPLES_DIR / "scanned_sample.pdf"
 
     print("=" * 60)
     print("Testing PyMuPDF extraction (digital PDF)")
     print("=" * 60)
-    if pdf_path.exists():
-        text = extract_text_from_pdf(str(pdf_path))
-        print(text if text else "(empty — this PDF may have no text layer)")
+    if digital_pdf.exists():
+        print(extract_text_from_pdf(str(digital_pdf)) or "(empty — no text layer)")
     else:
-        print(f"Sample file not found: {pdf_path}")
+        print(f"Sample file not found: {digital_pdf}")
 
     print()
     print("=" * 60)
-    print("Testing EasyOCR extraction (image)")
+    print("Testing EasyOCR extraction (loose image file)")
     print("=" * 60)
-    if image_path.exists():
-        text = extract_text_from_image(str(image_path))
-        print(text if text else "(empty — EasyOCR found no readable text)")
+    if loose_image.exists():
+        print(extract_text_from_image(str(loose_image)) or "(empty — no text found)")
     else:
-        print(f"Sample file not found: {image_path}")
+        print(f"Sample file not found: {loose_image}")
+
+    print()
+    print("=" * 60)
+    print("Testing scanned PDF pipeline (pdf2image + EasyOCR)")
+    print("=" * 60)
+    if scanned_pdf.exists():
+        print(extract_text_from_scanned_pdf(str(scanned_pdf)) or "(empty — no text found)")
+    else:
+        print(f"Sample file not found: {scanned_pdf}")
 
 
 if __name__ == "__main__":

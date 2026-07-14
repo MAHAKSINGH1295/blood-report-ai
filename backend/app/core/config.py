@@ -11,3 +11,6 @@ ALLOWED_MIME_TYPES = {
 }
 
 MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024
+
+POPPLER_PATH: str | None=r"C:\poppler\Library\bin"
+OCR_DPI=250
