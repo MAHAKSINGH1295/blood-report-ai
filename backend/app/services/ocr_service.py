@@ -3,7 +3,7 @@ from pathlib import Path
 import fitz  # PyMuPDF
 import easyocr
 from pdf2image import convert_from_path
-
+from app.services.preprocessing import preprocess_for_ocr
 from app.core.config import POPPLER_PATH, OCR_DPI
 
 _reader: easyocr.Reader | None = None
